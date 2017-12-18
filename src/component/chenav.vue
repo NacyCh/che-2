@@ -10,6 +10,7 @@
         <i @click='deleteTab' class='el-icon-circle-close-outline addTab'></i>
       <el-menu-item
         v-for="(tab, index) in allTabs"
+        :key="tab"
         :index='tab.id.toString()'
         :class='{activeTab: activeTab === tab}'
         @click="updateActiveTab(tab)">

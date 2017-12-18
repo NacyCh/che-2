@@ -27,6 +27,7 @@
         <el-menu-item
           v-for='(note, index) in searchNotes'
           class='che-notex'
+          :key="note"
           :index='note.id.toString()'
           :class='{active: activeTab.activeNote === note}'
           @click="updateActiveNote(note)">
