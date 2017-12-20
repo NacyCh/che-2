@@ -4,6 +4,7 @@ import {
   NEW_NOTE,
   DELETE_NOTE,
   TOGGLE_FAVORITE,
+  TOGGLE_RENAME_SHOW,
   UPDATE_NOTE,
   UPDATE_TAB,
   TOGGLE_LIST_SHOW,
@@ -13,16 +14,11 @@ import {
   RENAME_NOTE
 } from './mutation-types'
 
-let i = 1;
+import { newNote, newTab} from './index.js'
+
 export default{
   [NEW_NOTE](state, data = {
-    newNote:{
-      id: +new Date(),
-      title: '无标题页',
-      createTime: new Date(),
-      content: '',
-      favorite: false
-    }
+    newNote: new newNote()
   }){
     state.activeTab.notes.push(data.newNote);
     state.activeTab.activeNote = data.newNote;
@@ -45,7 +41,14 @@ export default{
   [TOGGLE_FAVORITE](state){
     state.activeTab.activeNote.favorite = !state.activeTab.activeNote.favorite;
   },
-
+  [TOGGLE_RENAME_SHOW](state, date){
+    state.tabs.forEach(tab => {
+      // body...
+      if (tab.id === date.tab.id){
+        tab.rename = !date.tab.rename;
+      }
+    });
+  },
   [UPDATE_NOTE](state, data){
     state.activeTab.notes.forEach(note => {
       // body...
@@ -100,22 +103,9 @@ export default{
         state.tabs.splice(i,1);
         state.activeTab = items[i - 1] || items[i] || {}
         if (state.tabs.length == 0){
-          let defaultNote = {
-            id: +new Date(),
-            title: '无标题页',
-            createTime: new Date(),
-            content: '',
-            favorite: false
-          };
-          let newTab = {
-            id: +new Date(),
-            title: '新分区',
-            notes: [defaultNote],
-            activeNote: defaultNote,
-            show: 'all'
-          };
-          state.tabs.push(newTab);
-          state.activeTab  = newTab;
+          let defaultTab = new newTab();
+          state.tabs.push(defaultTab);
+          state.activeTab  = defaultTab;
         }
         return
       }
@@ -123,23 +113,10 @@ export default{
   },
 
   [NEW_TAB](state, data = {
-    newTab:{
-      id: +new Date(),
-      title: '新分区'+i,
-      notes: [],
-      activeNote: {
-        id: +new Date(),
-        title: '无标题页',
-        createTime: new Date(),
-        content: '',
-        favorite: false
-      },
-      show: 'all'
-    }
+    newTab: new newTab()
   }){
     state.tabs.push(data.newTab);
     state.activeTab  = data.newTab;
-    state.activeTab.notes.push(data.newTab.activeNote);
     i ++
   },
 }

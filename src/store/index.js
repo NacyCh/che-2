@@ -7,21 +7,28 @@ import actions from './actions'
 
 Vue.use(Vuex)
 
-const defaultNote = {
-  id: +new Date(),
-  title: '我的笔记',
-  createTime: new Date(),
-  content: '',
-  favorite: false
-};
+export class newNote {
+  constructor(){
+    this.id = +new Date();
+    this.title = '无标题页';
+    this.createTime = new Date();
+    this.content = '';
+    this.favorite = false;
+  }
+}
 
-const defaultTab = {
-  id: +new Date(),
-  title: '新分区',
-  notes: [defaultNote],
-  activeNote: defaultNote,
-  show: 'all'
-};
+export class newTab{
+  constructor(){
+    this.id = +new Date();
+    this.title = '新分区';
+    this.rename = false;
+    this.activeNote = new newNote();
+    this.notes = [this.activeNote];
+    this.show = 'all'
+  }
+}
+
+const defaultTab = new newTab();
 
 const state = {
   tabs: [defaultTab],

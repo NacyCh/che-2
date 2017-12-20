@@ -3,23 +3,30 @@
     <el-menu
       class="che-menu"
       mode="horizontal"
-      background-color="#545c64"
       text-color="#fff"
-      active-text-color="#fff">
+      active-text-color="#fff"
+      >
         <i @click='newTab' class='el-icon-circle-plus-outline addTab'></i>
         <i @click='deleteTab' class='el-icon-circle-close-outline addTab'></i>
-      <el-menu-item
+      <el-menu-item class="che-menu-item"
         v-for="(tab, index) in allTabs"
-        :key="tab"
+        :key="index"
         :index='tab.id.toString()'
         :class='{activeTab: activeTab === tab}'
-        @click="updateActiveTab(tab)">
-        <input class='che-tabtitle'
+        @click="updateActiveTab(tab)"
+       >
+        <input class='che-tabtitle' ref='tabtittle_edit'
           name='title'
           placeholder="请输入名称"
           v-model="tab.title"
-          @input="tabRename" />
-          <span class='che-tabtitle' v-model="tab.title"></span>
+          @input="tabRename"
+          @blur="renameShow(tab)"
+          v-show="tab.rename"/>
+        <span class='che-tabtitle'
+          v-show="!tab.rename"
+          @dblclick="renameShow(tab)">
+          {{ tab.title }}
+        </span>
       </el-menu-item>
     </el-menu>
   </div>
@@ -53,11 +60,24 @@ export default {
       'newTab',
       'deleteTab',
       'setActiveTab',
-      'renameTab'
+      'renameTab',
+      'toggleRenameShow'
     ]),
 
     updateActiveTab(tab){
       this.setActiveTab({ tab});
+    },
+    renameShow(tab){
+      this.toggleRenameShow({ tab});
+      this.$nextTick(() => {
+        if (tab.rename){
+          this.$refs.tabtittle_edit.forEach(element => {
+            if (element.style.display == ''){
+              element.focus()
+            }
+          });
+        }
+      })
     },
     tabRename(){
       this.renameTab({
@@ -75,13 +95,25 @@ export default {
 .che-menu{
   border: 0px;
   width: 100%;
+  background-color: #545c64;
 }
-.che-menu li{
-  border: 0px;
+.che-menu-item{
+  padding: 0px;
+}
+.is-active{
   border-bottom-color: #545c64 !important;
+}
+.che-menu li:hover{
+  border-bottom-color: #545c64;
+  background-color: rgb(67,74,80) !important
+}
+.che-menu li:hover span{
+  background-color: inherit;
 }
 .activeTab{
   color: #ffd04b !important;
+  background: #545c64 !important;
+  border-bottom-color: #ffd04b !important;
 }
 .addTab{
   color: #fff;
@@ -90,12 +122,24 @@ export default {
   padding-left: 10px;
 }
 .che-tabtitle{
+  display: inline-block;
   width: 80px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
   border: 0px;
+  padding: 0px;
+  margin: 0px 20px;
   color: inherit;
   background: #545c64;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+span.che-tabtitle{
+  margin: 0px;
+  padding: 0px 20px;
+  height: 54px;
+  line-height: 55px;
 }
 </style>

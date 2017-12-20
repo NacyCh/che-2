@@ -7,6 +7,7 @@ import {
   UPDATE_NOTE,
   UPDATE_TAB,
   TOGGLE_LIST_SHOW,
+  TOGGLE_RENAME_SHOW,
   NEW_TAB,
   DELETE_TAB,
   RENAME_TAB,
@@ -22,6 +23,7 @@ function makeActionA(type){
 export default {
   newNote: makeActionA('NEW_NOTE'),
   toggleFavorite: makeAction('TOGGLE_FAVORITE'),
+  toggleRenameShow: makeAction('TOGGLE_RENAME_SHOW'),
   deleteNote: makeAction('DELETE_NOTE'),
   toggleListShow: makeAction('TOGGLE_LIST_SHOW'),
   setActiveNote: makeAction('SET_CURRENT_ACTIVE_NOTE'),
