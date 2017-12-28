@@ -1,20 +1,18 @@
 <template>
   <div id="noteList">
-    <div style="padding-top: 20px;">
       <!-- search -->
-      <el-input class='che-search' placeholder="Search for..." v-model="search">
-        <el-button slot="append" icon="el-icon-search"></el-button>
-      </el-input>
-    </div>
-    <el-button-group class='che-toggle'>
+    <el-input class='che-search first-line' placeholder="Search for..." v-model="search">
+      <el-button slot="append" icon="el-icon-search"></el-button>
+    </el-input>
+    <el-button-group class='first-line'>
       <!-- all -->
-      <el-button
+      <el-button class='che-toggle'
         @click="toggleShow('all')"
         :class="{active: show === 'all'}">
         All Notes
       </el-button>
       <!-- favorites -->
-      <el-button
+      <el-button class='che-toggle'
         @click="toggleShow('favorite')"
         :class="{active: show === 'favorite'}">
         Favorite
@@ -90,15 +88,15 @@ export default {
   margin-top: 0px;
   padding: 0px;
   height: calc(100% - 145px);
+  text-align: center;
 }
 .che-toggle{
-  padding: 20px 0px 0px 20px;
+  width: 100px;
 }
 .che-search{
-  margin-left: 20px;
-  width: 183px;
+  width: 199px;
+  padding-left: 7px;
 }
-
 .che-noteList{
   padding: 0px;
   margin-top: 20px;
@@ -117,6 +115,7 @@ export default {
   margin-top: -13px;
   height: calc(100% - 10px);
   max-height: calc(100% - 10px);
+  text-align: left;
 }
 .che-note-group li{
   background: #fff;

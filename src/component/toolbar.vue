@@ -1,11 +1,13 @@
 <template>
   <div id="toolbar">
+    <div class='first-line'>
     <i @click='newNote' class='el-icon-plus'></i>
     <i @click='toggleFavorite'
       class='el-icon-star-on'
       :class="{starred: activeTab.activeNote.favorite}">
     </i>
     <i @click='deleteNote' class='el-icon-close'></i>
+    </div>
   </div>
 </template>
 <script>
@@ -29,20 +31,20 @@ export default {
   color: #767676;
   padding: 0px;
   height: 100%;
+  text-align: center;
 }
 
 .starred{
   color: #f7ae4f;
 }
-.el-icon-plus{
-  padding-top: 35px;
-}
+
 #toolbar i {
+  display: block;
   font-size: 30px;
-  margin: 25px;
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.5s ease;
+  padding: 25px 0;
 }
 
 #toolbar i:hover{

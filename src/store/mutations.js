@@ -117,6 +117,5 @@ export default{
   }){
     state.tabs.push(data.newTab);
     state.activeTab  = data.newTab;
-    i ++
   },
 }

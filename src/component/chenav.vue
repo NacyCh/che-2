@@ -6,8 +6,10 @@
       text-color="#fff"
       active-text-color="#fff"
       >
+      <span class='tab-focus'>
         <i @click='newTab' class='el-icon-circle-plus-outline addTab'></i>
         <i @click='deleteTab' class='el-icon-circle-close-outline addTab'></i>
+      </span>
       <el-menu-item class="che-menu-item"
         v-for="(tab, index) in allTabs"
         :key="index"
@@ -102,6 +104,9 @@ export default {
 }
 .is-active{
   border-bottom-color: #545c64 !important;
+}
+.tab-focus:focus{
+  outline: none;
 }
 .che-menu li:hover{
   border-bottom-color: #545c64;

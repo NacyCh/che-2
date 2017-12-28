@@ -9,7 +9,7 @@
           <toolbar></toolbar>
         </el-aside>
         <el-container>
-          <el-aside width='220px' class="grid-content bg-purple-light">
+          <el-aside width='240px' class="grid-content bg-purple-light">
             <noteList></noteList>
           </el-aside>
           <el-main class="grid-content1">
@@ -67,5 +67,8 @@ body{
 .el-aside, .el-container{
   height: 100%;
   max-height: 100%;
+}
+.first-line{
+  padding-top: 20px;
 }
 </style>
